@@ -1,10 +1,6 @@
 const path = require("path");
-
 module.exports = {
   mode: "development",
-  devServer: {
-    contentBase: "./build",
-  },
   devtool: "source-map",
   entry: "./src/index.tsx",
   output: {
