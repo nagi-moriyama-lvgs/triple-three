@@ -6,7 +6,7 @@ cd minimal-react-ts-webpack
 git init
 npm init -y
 npm install react react-dom @types/react @types/react-dom
-npm install --save-dev typescript ts-loader webpack webpack-cli webpack-dev-server source-map-loader
+npm install --save-dev typescript ts-loader webpack webpack-cli
 
 touch tsconfig.json
 touch webpack.config.js
