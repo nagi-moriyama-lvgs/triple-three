@@ -8,6 +8,9 @@ module.exports = {
     path: path.resolve(__dirname, "build"),
   },
   resolve: {
+    alias: {
+      components: path.resolve(__dirname, "src/components"),
+    },
     extensions: [".ts", ".tsx", ".js", ".json"],
   },
   module: {
