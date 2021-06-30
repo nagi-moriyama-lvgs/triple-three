@@ -3,12 +3,13 @@ import styled from "styled-components";
 
 type BaseSquareProps = {
   className?: string;
-  number: number;
+  number?: number;
+  id?: string;
 };
 
-const BaseSquare: React.FC<BaseSquareProps> = ({ className, number }) => {
+const BaseSquare: React.FC<BaseSquareProps> = ({ className, number, id }) => {
   return (
-    <div className={className}>
+    <div className={className} id={id}>
       <span>{number}</span>
     </div>
   );

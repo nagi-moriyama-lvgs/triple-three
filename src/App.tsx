@@ -1,11 +1,10 @@
 import React from "react";
-import NineSquares from "./components/molecules/NineSquares";
+import TripleThreeCore from "./components/organisms/TripleThreeCore";
 
 const App = () => {
   return (
     <>
-      <h1>hello world</h1>
-      <NineSquares />
+      <TripleThreeCore />
     </>
   );
 };
