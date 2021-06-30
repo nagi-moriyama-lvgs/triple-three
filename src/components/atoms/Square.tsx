@@ -9,15 +9,21 @@ type BaseSquareProps = {
 const BaseSquare: React.FC<BaseSquareProps> = ({ className, number }) => {
   return (
     <div className={className}>
-      <h1>{number}</h1>
+      <span>{number}</span>
     </div>
   );
 };
 
 const Square = styled(BaseSquare)`
   & {
-    h1 {
-      color: red;
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      font-size: 2rem;
     }
   }
 `;

@@ -15,3 +15,7 @@ mkdir src
 touch src/App.tsx
 touch src/index.tsx
 ```
+
+```
+npm install --save-dev styled-components @types/styled-components
+```
