@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import styled from "styled-components";
-import Square from "components/atoms/Square";
+import Square from "~/components/atoms/Square";
 
 type BaseNineSquaresProps = {
   className?: string;

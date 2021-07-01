@@ -8,16 +8,17 @@ module.exports = {
     path: path.resolve(__dirname, "build"),
   },
   resolve: {
-    alias: {
-      components: path.resolve(__dirname, "src/components"),
-    },
     extensions: [".ts", ".tsx", ".js", ".json"],
+    alias: {
+      "~": path.resolve(__dirname, "/src"),
+    },
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: [{ loader: "ts-loader" }],
+        exclude: /node_modules/,
       },
     ],
   },
