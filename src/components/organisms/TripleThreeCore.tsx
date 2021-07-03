@@ -1,7 +1,8 @@
 import React, { memo } from "react";
 import styled from "styled-components";
-import Square from "../atoms/Square";
-import NineSquares from "../molecules/NineSquares";
+import Square from "~/components/atoms/Square";
+import NineSquares from "~/components/molecules/NineSquares";
+import { useDnD } from "~/hooks/useDnD";
 
 type BaseTripleThreeCoreProps = {
   className?: string;
@@ -10,6 +11,11 @@ type BaseTripleThreeCoreProps = {
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
 }) => {
+  const handList: number[] = [1, 2];
+
+  const results = useDnD(handList);
+  // result = [reseveElement, drugElement]
+
   return (
     <div className={className}>
       <div className={"empty_area"}></div>
@@ -27,8 +33,19 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         <NineSquares />
       </div>
       <div className={"hand_area"}>
-        <SquareMini number={0} />
-        <SquareMini number={0} />
+        {results.map((item) => (
+          <div key={item.value}>
+            <SquareMini
+              number={item.value}
+              className={"hand"}
+              onClick={() => {
+                console.log("tensai");
+              }}
+              {...item.events}
+            />
+            {console.log(item)}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -68,6 +85,9 @@ const TripleThreeCore = styled(BaseTripleThreeCore)`
       grid-row: 3 / 4;
       grid-column: 2 / 3;
       display: flex;
+      .hand {
+        cursor: pointer;
+      }
     }
   }
 `;

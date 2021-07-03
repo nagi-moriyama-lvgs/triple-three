@@ -7,13 +7,16 @@ type BaseSquareProps = {
   id?: string;
 };
 
-const BaseSquare: React.FC<BaseSquareProps> = ({ className, number, id }) => {
+const BaseSquare = React.forwardRef<HTMLDivElement, BaseSquareProps>(function (
+  { className, number, id, ...props },
+  ref
+) {
   return (
-    <div className={className} id={id}>
+    <div className={className} id={id} ref={ref} {...props}>
       <span>{number}</span>
     </div>
   );
-};
+});
 
 const Square = styled(BaseSquare)`
   & {
