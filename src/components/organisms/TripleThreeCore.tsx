@@ -12,17 +12,23 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
 }) => {
   return (
     <div className={className}>
-      <div className={"row"}>
-        <div className={"space"}></div>
-        <div className={"flex"}>
-          <SquareMini />
-          <SquareMini />
-          <SquareMini />
-        </div>
+      <div className={"empty_area"}></div>
+      <div className={"top_area"}>
+        <SquareMini />
+        <SquareMini />
+        <SquareMini />
       </div>
-      <div className={"line flex"}>
-        <div>set number area</div>
+      <div className={"left_area"}>
+        <SquareMini />
+        <SquareMini />
+        <SquareMini />
+      </div>
+      <div className={"main_area"}>
         <NineSquares />
+      </div>
+      <div className={"hand_area"}>
+        <SquareMini number={0} />
+        <SquareMini number={0} />
       </div>
     </div>
   );
@@ -38,15 +44,29 @@ const SquareMini = styled(Square)`
 
 const TripleThreeCore = styled(BaseTripleThreeCore)`
   & {
-    .row {
-      display: flex;
-      .space {
-        width: 5rem;
-      }
-      flex {
-      }
+    display: grid;
+    grid-template-rows: 100px 300px 100px;
+    grid-template-columns: 100px 300px;
+    .empty_area {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
     }
-    .flex {
+    .top_area {
+      grid-row: 1 / 2;
+      grid-column: 2 / 3;
+      display: flex;
+    }
+    .left_area {
+      grid-row: 2 / 3;
+      grid-column: 1 / 2;
+    }
+    .main_area {
+      grid-row: 2 / 3;
+      grid-column: 2 / 3;
+    }
+    .hand_area {
+      grid-row: 3 / 4;
+      grid-column: 2 / 3;
       display: flex;
     }
   }
