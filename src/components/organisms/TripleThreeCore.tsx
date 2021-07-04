@@ -11,39 +11,43 @@ type BaseTripleThreeCoreProps = {
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
 }) => {
-  const handList: number[] = [1, 2];
+  const dragList: string[] = ['hand_1', 'hand_2'];
+  const dropList: string[] = ['drop_1','drop_2','drop_3','drop_4','drop_5','drop_6'];
 
-  const results = useDnD(handList);
-  // result = [reseveElement, drugElement]
+  const [dragResults, dropResults] = useDnD(dragList, dropList);
 
   return (
     <div className={className}>
       <div className={"empty_area"}></div>
       <div className={"top_area"}>
-        <SquareMini />
-        <SquareMini />
-        <SquareMini />
+        {dropResults.map((item,index) => (
+          <div key={item.value}>
+          {index < 3 && 
+            <SquareMini number={item.value} {...item.events} />
+          }
+          </div>
+        ))}
       </div>
       <div className={"left_area"}>
-        <SquareMini />
-        <SquareMini />
-        <SquareMini />
+      {dropResults.map((item,index) => (
+          <div key={item.value}>
+          {index >= 3 && 
+            <SquareMini number={0} {...item.events} />
+          }
+          </div>
+      ))}
       </div>
       <div className={"main_area"}>
         <NineSquares />
       </div>
       <div className={"hand_area"}>
-        {results.map((item) => (
+        {dragResults.map((item) => (
           <div key={item.value}>
             <SquareMini
-              number={item.value}
+              number={9}
               className={"hand"}
-              onClick={() => {
-                console.log("tensai");
-              }}
               {...item.events}
             />
-            {console.log(item)}
           </div>
         ))}
       </div>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 type BaseSquareProps = {
   className?: string;
-  number?: number;
+  number?: number | string;
   id?: string;
 };
 
