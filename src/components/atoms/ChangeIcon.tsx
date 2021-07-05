@@ -10,6 +10,7 @@ const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => {
       y="0px"
       viewBox="0 0 512 512"
       fill={props.color}
+      {...props}
     >
       <g>
         <path
