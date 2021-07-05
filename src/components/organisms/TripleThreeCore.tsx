@@ -1,8 +1,7 @@
-import React, { memo } from "react";
+import React, { memo, useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import Square from "~/components/atoms/Square";
+import Adder from "~/components/atoms/Adder";
 import NineSquares from "~/components/molecules/NineSquares";
-import { useDnD } from "~/hooks/useDnD";
 
 type BaseTripleThreeCoreProps = {
   className?: string;
@@ -11,57 +10,44 @@ type BaseTripleThreeCoreProps = {
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
 }) => {
-  const dragList: string[] = ['hand_1', 'hand_2'];
-  const dropList: string[] = ['drop_1','drop_2','drop_3','drop_4','drop_5','drop_6'];
+  const initializeAdderValues = [...Array(6)].map((_, index) => ({
+    index: index,
+    value: "",
+  }));
+  const [adderValues, setAdderValues] = useState(initializeAdderValues);
 
-  const [dragResults, dropResults] = useDnD(dragList, dropList);
+  // adderをクリックした時にvalueを差し替える
+  const onClickSelect = useCallback((event) => {
+    // const newAdderValues = Array.from(initializeAdderValues);
+    // 配列のディープコピーができず、再生性
+    const newAdderValues = [...Array(6)].map((_, index) => ({
+      index: index,
+      value: "",
+    }));
+    newAdderValues[event.currentTarget.dataset.index].value = "+1";
+    setAdderValues(newAdderValues);
+  }, []);
 
   return (
     <div className={className}>
       <div className={"empty_area"}></div>
       <div className={"top_area"}>
-        {dropResults.map((item,index) => (
-          <div key={item.value}>
-          {index < 3 && 
-            <SquareMini number={item.value} {...item.events} />
-          }
-          </div>
-        ))}
+        <Adder onClick={onClickSelect} {...adderValues[0]} />
+        <Adder onClick={onClickSelect} {...adderValues[1]} />
+        <Adder onClick={onClickSelect} {...adderValues[2]} />
       </div>
       <div className={"left_area"}>
-      {dropResults.map((item,index) => (
-          <div key={item.value}>
-          {index >= 3 && 
-            <SquareMini number={0} {...item.events} />
-          }
-          </div>
-      ))}
+        <Adder onClick={onClickSelect} {...adderValues[3]} />
+        <Adder onClick={onClickSelect} {...adderValues[4]} />
+        <Adder onClick={onClickSelect} {...adderValues[5]} />
       </div>
       <div className={"main_area"}>
         <NineSquares />
       </div>
-      <div className={"hand_area"}>
-        {dragResults.map((item) => (
-          <div key={item.value}>
-            <SquareMini
-              number={9}
-              className={"hand"}
-              {...item.events}
-            />
-          </div>
-        ))}
-      </div>
+      <div className={"hand_area"}></div>
     </div>
   );
 };
-
-const SquareMini = styled(Square)`
-  & {
-    width: 3rem;
-    height: 3rem;
-    margin-left: 3rem;
-  }
-`;
 
 const TripleThreeCore = styled(BaseTripleThreeCore)`
   & {
