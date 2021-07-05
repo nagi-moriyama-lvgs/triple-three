@@ -1,6 +1,7 @@
-import React, { memo, useState, useCallback, useEffect } from "react";
+import React, { memo, useState, useCallback } from "react";
 import styled from "styled-components";
 import Adder from "~/components/atoms/Adder";
+import ChangeIcon from "~/components/atoms/ChangeIcon";
 import NineSquares from "~/components/molecules/NineSquares";
 
 type BaseTripleThreeCoreProps = {
@@ -44,7 +45,9 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       <div className={"main_area"}>
         <NineSquares />
       </div>
-      <div className={"hand_area"}></div>
+      <div className={"hand_area"}>
+        <ChangeIcon color={"gray"} />
+      </div>
     </div>
   );
 };

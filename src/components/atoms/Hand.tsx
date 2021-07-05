@@ -1,25 +1,23 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 
-type BaseAdderProps = {
+type BaseHandProps = {
   className?: string;
   value?: string;
-  index?: number;
-  onClick?: (event: React.MouseEvent) => void;
 };
 
-const BaseAdder = React.forwardRef<HTMLDivElement, BaseAdderProps>(function (
-  { className, value, onClick, index },
+const BaseHand = React.forwardRef<HTMLDivElement, BaseHandProps>(function (
+  { className, value },
   ref
 ) {
   return (
-    <div className={className} ref={ref} onClick={onClick} data-index={index}>
+    <div className={className} ref={ref}>
       <span>{value}</span>
     </div>
   );
 });
 
-const Adder = styled(BaseAdder)`
+const Hand = styled(BaseHand)`
   & {
     width: 3rem;
     height: 3rem;
@@ -33,4 +31,4 @@ const Adder = styled(BaseAdder)`
   }
 `;
 
-export default memo<BaseAdderProps>(Adder);
+export default memo<BaseHandProps>(Hand);
