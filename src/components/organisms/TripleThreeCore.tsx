@@ -1,9 +1,8 @@
 import React, { memo, useState, useCallback } from "react";
 import styled from "styled-components";
 import Adder from "~/components/atoms/Adder";
-import Hand from "~/components/atoms/Hand";
+import Button from "~/components/atoms/Button";
 import Hands from "~/components/molecules/Hands";
-import ChangeIcon from "~/components/atoms/ChangeIcon";
 import NineSquares from "~/components/molecules/NineSquares";
 
 type BaseTripleThreeCoreProps = {
@@ -65,6 +64,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       <div className={"hand_area"}>
         <Hands values={hands} onClick={changeHands} />
       </div>
+      <Button className={"button_area"} />
     </div>
   );
 };
@@ -73,7 +73,7 @@ const TripleThreeCore = styled(BaseTripleThreeCore)`
   & {
     display: grid;
     grid-template-rows: 100px 300px 100px;
-    grid-template-columns: 100px 300px;
+    grid-template-columns: 100px 200px 100px;
     .empty_area {
       grid-row: 1 / 2;
       grid-column: 1 / 2;
@@ -89,7 +89,7 @@ const TripleThreeCore = styled(BaseTripleThreeCore)`
     }
     .main_area {
       grid-row: 2 / 3;
-      grid-column: 2 / 3;
+      grid-column: 2 / 4;
     }
     .hand_area {
       grid-row: 3 / 4;
@@ -98,6 +98,10 @@ const TripleThreeCore = styled(BaseTripleThreeCore)`
       .hand {
         cursor: pointer;
       }
+    }
+    .button_area {
+      grid-row: 3 / 4;
+      grid-column: 3 / 4;
     }
   }
 `;
