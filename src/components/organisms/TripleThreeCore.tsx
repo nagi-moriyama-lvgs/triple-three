@@ -13,23 +13,38 @@ type BaseTripleThreeCoreProps = {
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
 }) => {
+  // Adder
   const initializeAdderValues = [...Array(6)].map((_, index) => ({
     index: index,
     value: "",
   }));
   const [adderValues, setAdderValues] = useState(initializeAdderValues);
 
-  // adderをクリックした時にvalueを差し替える
-  const onClickSelect = useCallback((event) => {
-    // const newAdderValues = Array.from(initializeAdderValues);
-    // 配列のディープコピーができず、再生性
+  // Hands
+  const [hands, setHands] = useState(["3", "7"]);
+  const changeHands = () => {
+    setHands([hands[1], hands[0]]);
+    const [{ index }] = adderValues.filter(({ value }) => !!value);
     const newAdderValues = [...Array(6)].map((_, index) => ({
-      index: index,
+      index,
       value: "",
     }));
-    newAdderValues[event.currentTarget.dataset.index].value = "+1";
+    newAdderValues[index].value = `+${hands[1]}`;
     setAdderValues(newAdderValues);
-  }, []);
+  };
+
+  // adderをクリックした時にvalueを差し替える
+  const onClickSelect = useCallback(
+    (event) => {
+      const newAdderValues = [...Array(6)].map((_, index) => ({
+        index: index,
+        value: "",
+      }));
+      newAdderValues[event.currentTarget.dataset.index].value = `+${hands[0]}`;
+      setAdderValues(newAdderValues);
+    },
+    [hands]
+  );
 
   return (
     <div className={className}>
@@ -48,7 +63,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         <NineSquares />
       </div>
       <div className={"hand_area"}>
-        <Hands values={["3", "7"]} />
+        <Hands values={hands} onClick={changeHands} />
       </div>
     </div>
   );
