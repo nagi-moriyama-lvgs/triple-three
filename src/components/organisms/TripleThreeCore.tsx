@@ -21,6 +21,14 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   }));
   const [adderValues, setAdderValues] = useState(initializeAdderValues);
 
+  const resetAdder = () => {
+    const newAdderValues = [...Array(6)].map((_, index) => ({
+      index: index,
+      value: "",
+    }));
+    setAdderValues(newAdderValues);
+  };
+
   // Hands
   const [hands, setHands] = useState([3, 7]);
   const changeHands = () => {
@@ -70,6 +78,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
           return value;
         })
       );
+      resetAdder();
       setSquares(newSquareValues);
     } else {
       alert("choose any rows or columns.");
