@@ -2,8 +2,10 @@ import React, { memo, useState, useCallback } from "react";
 import styled from "styled-components";
 import Adder from "~/components/atoms/Adder";
 import Button from "~/components/atoms/Button";
+import Score from "~/components/atoms/Score";
 import Hands from "~/components/molecules/Hands";
 import NineSquares from "~/components/molecules/NineSquares";
+import Square from "../atoms/Square";
 
 type BaseTripleThreeCoreProps = {
   className?: string;
@@ -81,6 +83,11 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     })
   );
 
+  // Score
+  const total_score = squares
+    .map((row) => row.reduce((sum, num) => sum + num))
+    .reduce((sum, num) => sum + num);
+
   return (
     <div className={className}>
       <div className={"empty_area"}></div>
@@ -100,7 +107,10 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       <div className={"hand_area"}>
         <Hands values={hands} onClick={changeHands} />
       </div>
-      <Button className={"button_area"} onClick={onClickCalculate} />
+      <div className={"button_area"}>
+        <Button onClick={onClickCalculate} />
+        <Score number={total_score} />
+      </div>
     </div>
   );
 };
