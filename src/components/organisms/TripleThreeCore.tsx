@@ -80,7 +80,6 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       if (value % 3 === 0) return true;
     })
   );
-  console.log(result);
 
   return (
     <div className={className}>

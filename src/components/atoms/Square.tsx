@@ -3,20 +3,20 @@ import styled from "styled-components";
 
 type BaseSquareProps = {
   className?: string;
-  number?: number | string;
-  id?: string;
+  number: number | string;
 };
 
-const BaseSquare = React.forwardRef<HTMLDivElement, BaseSquareProps>(function (
-  { className, number, id, ...props },
-  ref
-) {
+const BaseSquare: React.FC<BaseSquareProps> = ({
+  className,
+  number,
+  ...props
+}) => {
   return (
-    <div className={className} id={id} ref={ref} {...props}>
+    <div className={className} {...props}>
       <span>{number}</span>
     </div>
   );
-});
+};
 
 const Square = styled(BaseSquare)`
   & {

@@ -18,7 +18,7 @@ const BaseNineSquares: React.FC<BaseNineSquaresProps> = ({
   const Squares = defaultValues.map((rowArray, i) => (
     <div className={"flex"} key={i}>
       {rowArray.map((squareNumber, j) => (
-        <Square number={squareNumber} key={`${i}-${j}`} id={`${i}-${j}`} />
+        <Square number={squareNumber} key={`${i}-${j}`} />
       ))}
     </div>
   ));

@@ -8,16 +8,18 @@ type BaseAdderProps = {
   onClick?: (event: React.MouseEvent) => void;
 };
 
-const BaseAdder = React.forwardRef<HTMLDivElement, BaseAdderProps>(function (
-  { className, value, onClick, index },
-  ref
-) {
+const BaseAdder: React.FC<BaseAdderProps> = ({
+  className,
+  value,
+  onClick,
+  index,
+}) => {
   return (
-    <div className={className} ref={ref} onClick={onClick} data-index={index}>
+    <div className={className} onClick={onClick} data-index={index}>
       <span>{value}</span>
     </div>
   );
-});
+};
 
 const Adder = styled(BaseAdder)`
   & {

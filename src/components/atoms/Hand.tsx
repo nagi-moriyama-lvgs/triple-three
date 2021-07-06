@@ -6,16 +6,13 @@ type BaseHandProps = {
   value?: number;
 };
 
-const BaseHand = React.forwardRef<HTMLDivElement, BaseHandProps>(function (
-  { className, value },
-  ref
-) {
+const BaseHand: React.FC<BaseHandProps> = ({ className, value }) => {
   return (
-    <div className={className} ref={ref}>
+    <div className={className}>
       <span>+{value}</span>
     </div>
   );
-});
+};
 
 const Hand = styled(BaseHand)`
   & {
