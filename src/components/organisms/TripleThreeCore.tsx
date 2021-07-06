@@ -60,10 +60,10 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       const newSquareValues = squares.map((row, i) =>
         row.map((value, j) => {
           // column adder
-          if (adderIndex <= 2 && adderIndex === j)
+          if (adderIndex <= 2 && adderIndex === j && squares[i][j] % 3 != 0)
             return squares[i][j] + hands[0];
           // row adder
-          if (adderIndex > 2 && adderIndex - 3 === i)
+          if (adderIndex > 2 && adderIndex - 3 === i && squares[i][j] % 3 != 0)
             return squares[i][j] + hands[0];
           return value;
         })
