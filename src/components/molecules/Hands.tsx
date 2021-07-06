@@ -5,7 +5,7 @@ import ChangeIcon from "../atoms/ChangeIcon";
 
 type BaseHandsProps = {
   className?: string;
-  values: string[];
+  values: number[];
   onClick?: () => void;
 };
 

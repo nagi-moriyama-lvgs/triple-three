@@ -20,7 +20,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   const [adderValues, setAdderValues] = useState(initializeAdderValues);
 
   // Hands
-  const [hands, setHands] = useState(["3", "7"]);
+  const [hands, setHands] = useState([3, 7]);
   const changeHands = () => {
     setHands([hands[1], hands[0]]);
     const [{ index }] = adderValues.filter(({ value }) => !!value);
@@ -45,6 +45,43 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     [hands]
   );
 
+  // Squares
+  const [squares, setSquares] = useState<number[][]>([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+  ]);
+
+  // button
+  const onClickCalculate = () => {
+    const [index] = adderValues.filter(({ value }) => !!value);
+    if (!!index) {
+      const adderIndex = index.index;
+      const newSquareValues = squares.map((row, i) =>
+        row.map((value, j) => {
+          // column adder
+          if (adderIndex <= 2 && adderIndex === j)
+            return squares[i][j] + hands[0];
+          // row adder
+          if (adderIndex > 2 && adderIndex - 3 === i)
+            return squares[i][j] + hands[0];
+          return value;
+        })
+      );
+      setSquares(newSquareValues);
+    } else {
+      alert("choose any row or column.");
+    }
+  };
+
+  // Squareに3の倍数が存在するかチェック
+  const result = squares.map((row) =>
+    row.map((value) => {
+      if (value % 3 === 0) return true;
+    })
+  );
+  console.log(result);
+
   return (
     <div className={className}>
       <div className={"empty_area"}></div>
@@ -59,12 +96,12 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         <Adder onClick={onClickSelect} {...adderValues[5]} />
       </div>
       <div className={"main_area"}>
-        <NineSquares />
+        <NineSquares defaultValues={squares} />
       </div>
       <div className={"hand_area"}>
         <Hands values={hands} onClick={changeHands} />
       </div>
-      <Button className={"button_area"} />
+      <Button className={"button_area"} onClick={onClickCalculate} />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 type BaseHandProps = {
   className?: string;
-  value?: string;
+  value?: number;
 };
 
 const BaseHand = React.forwardRef<HTMLDivElement, BaseHandProps>(function (
@@ -12,7 +12,7 @@ const BaseHand = React.forwardRef<HTMLDivElement, BaseHandProps>(function (
 ) {
   return (
     <div className={className} ref={ref}>
-      <span>{value}</span>
+      <span>+{value}</span>
     </div>
   );
 });

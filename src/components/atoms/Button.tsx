@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 type BaseButtonProps = {
   className?: string;
+  onClick: () => void;
 };
 
-const BaseButton: React.FC<BaseButtonProps> = ({ className }) => {
+const BaseButton: React.FC<BaseButtonProps> = ({ className, onClick }) => {
   return (
-    <div className={className}>
+    <div className={className} onClick={onClick}>
       <button>Add</button>
     </div>
   );
