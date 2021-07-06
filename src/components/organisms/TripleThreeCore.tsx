@@ -70,7 +70,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       );
       setSquares(newSquareValues);
     } else {
-      alert("choose any row or column.");
+      alert("choose any rows or columns.");
     }
   };
 
