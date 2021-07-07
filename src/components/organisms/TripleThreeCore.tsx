@@ -14,6 +14,25 @@ type BaseTripleThreeCoreProps = {
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
 }) => {
+  const INITIAL_VALUES = [1, 2, 4, 5, 7, 8];
+  const initialSquares: number[][] = [
+    [
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+    ],
+    [
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+    ],
+    [
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+    ],
+  ];
+
   // Adder
   const initializeAdderValues = [...Array(6)].map((_, index) => ({
     index: index,
@@ -42,6 +61,13 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     setAdderValues(newAdderValues);
   };
 
+  const drawNewHand = () => {
+    setHands([
+      hands[1],
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+    ]);
+  };
+
   // adderをクリックした時にvalueを差し替える
   const onClickSelect = useCallback(
     (event) => {
@@ -56,11 +82,12 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   );
 
   // Squares
-  const [squares, setSquares] = useState<number[][]>([
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-  ]);
+  const [squares, setSquares] = useState<number[][]>(initialSquares);
+  //   [
+  //   [1, 2, 3],
+  //   [4, 5, 6],
+  //   [7, 8, 9],
+  // ]
 
   // button
   const onClickCalculate = () => {
@@ -79,6 +106,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         })
       );
       resetAdder();
+      drawNewHand();
       setSquares(newSquareValues);
     } else {
       alert("choose any rows or columns.");
