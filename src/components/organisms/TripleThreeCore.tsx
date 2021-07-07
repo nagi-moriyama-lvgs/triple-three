@@ -11,6 +11,11 @@ type BaseTripleThreeCoreProps = {
   className?: string;
 };
 
+// local storageでbestスコアを表示
+// local storageで現在の状態を保持
+// resetボタンを作成
+// ３の倍数が３つ以上でgame overにする。
+
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
 }) => {
@@ -52,6 +57,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   const [hands, setHands] = useState([3, 7]);
   const changeHands = () => {
     setHands([hands[1], hands[0]]);
+    // ======= adderを設定していないときにはindexがない！！！！=============
     const [{ index }] = adderValues.filter(({ value }) => !!value);
     const newAdderValues = [...Array(6)].map((_, index) => ({
       index,
