@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 import styled from "styled-components";
-import clsx from "clsx";
 
 type BaseScoreProps = {
   className?: string;

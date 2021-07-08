@@ -3,13 +3,18 @@ import styled from "styled-components";
 
 type BaseButtonProps = {
   className?: string;
+  disabled?: boolean;
   onClick: () => void;
 };
 
-const BaseButton: React.FC<BaseButtonProps> = ({ className, onClick }) => {
+const BaseButton: React.FC<BaseButtonProps> = ({
+  className,
+  disabled,
+  onClick,
+}) => {
   return (
     <div className={className} onClick={onClick}>
-      <button>Add</button>
+      <button disabled={disabled}>Add</button>
     </div>
   );
 };

@@ -14,11 +14,11 @@ type BaseTripleThreeCoreProps = {
 // local storageでbestスコアを表示
 // local storageで現在の状態を保持
 // resetボタンを作成
-// ３の倍数が３つ以上でgame overにする。
 
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
 }) => {
+  const GAMEOVER_COUNT = 3;
   const INITIAL_VALUES = [1, 2, 4, 5, 7, 8];
   const initialSquares: number[][] = [
     [
@@ -119,17 +119,25 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     }
   };
 
-  // Squareに3の倍数が存在するかチェック
-  const result = squares.map((row) =>
-    row.map((value) => {
-      if (value % 3 === 0) return true;
-    })
-  );
-
   // Score
-  const total_score = squares
-    .map((row) => row.reduce((sum, num) => sum + num))
-    .reduce((sum, num) => sum + num);
+  let score = 0;
+  squares.forEach((row) => {
+    row.forEach((square) => {
+      if (!(square % 3 === 0)) score += square;
+    });
+  });
+
+  const [buttonState, setButtonState] = React.useState(false);
+  // ゲームオーバーの確認
+  if (!buttonState) {
+    let multipleOfThree = 0;
+    squares.forEach((row) =>
+      row.forEach((square) => {
+        if (square % 3 === 0) multipleOfThree++;
+      })
+    );
+    if (multipleOfThree >= GAMEOVER_COUNT) setButtonState(true);
+  }
 
   return (
     <div className={className}>
@@ -151,8 +159,8 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         <Hands values={hands} onClick={changeHands} />
       </div>
       <div className={"button_area"}>
-        <Button onClick={onClickCalculate} />
-        <Score number={total_score} />
+        <Button onClick={onClickCalculate} disabled={buttonState} />
+        <Score number={score} />
       </div>
     </div>
   );
