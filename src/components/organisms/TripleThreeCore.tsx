@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback } from "react";
+import React, { memo, useState, useCallback, useRef } from "react";
 import styled from "styled-components";
 import Adder from "~/components/atoms/Adder";
 import Button from "~/components/atoms/Button";
@@ -53,12 +53,6 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   });
 
   // Adder
-  const initializeAdderValues = [...Array(6)].map((_, index) => ({
-    index: index,
-    value: "",
-  }));
-  const [adderValues, setAdderValues] = useState(initializeAdderValues);
-
   type AdderType = {
     index: number;
     value: string;
@@ -69,6 +63,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       value: "",
     }));
   };
+  const [adderValues, setAdderValues] = useState(createEmptyAdder());
   const resetAdder = () => setAdderValues(createEmptyAdder());
 
   // Hands
@@ -76,20 +71,6 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
     INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
   ]);
-
-  const changeHands = () => {
-    setHands([hands[1], hands[0]]);
-
-    const adderArray = adderValues.filter(({ value }) => !!value); // adderを取得
-    // Handsの入れ替えに応じてAdderも入れ替え。
-    if (adderArray.length) {
-      const [{ index }] = adderArray;
-      const newAdderValues = createEmptyAdder();
-      newAdderValues[index].value = `+${hands[1]}`;
-      setAdderValues(newAdderValues);
-    }
-  };
-
   const drawNewHand = () => {
     setHands([
       hands[1],
@@ -158,7 +139,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         <NineSquares defaultValues={squares} />
       </div>
       <div className={"hand_area"}>
-        <Hands values={hands} onClick={changeHands} />
+        <Hands values={hands} />
       </div>
       <div className={"button_area"}>
         <Button onClick={onClickCalculate} disabled={buttonState} />

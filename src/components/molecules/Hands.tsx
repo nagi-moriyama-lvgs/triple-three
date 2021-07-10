@@ -5,18 +5,17 @@ import ChangeIcon from "../atoms/ChangeIcon";
 
 type BaseHandsProps = {
   className?: string;
-  values: number[];
-  onClick?: () => void;
+  values: [number, number];
 };
 
-const BaseHands: React.FC<BaseHandsProps> = ({
-  className,
-  values,
-  onClick,
-}) => {
+const BaseHands: React.FC<BaseHandsProps> = ({ className, values }) => {
+  const [hands, setHands] = useState<[number, number]>(values);
+  const changeHands = () => {
+    setHands([hands[1], hands[0]]);
+  };
   return (
     <div className={className}>
-      <ChangeIcon color={"gray"} onClick={onClick} />
+      <ChangeIcon color={"gray"} onClick={changeHands} />
       <Hand className={"main_hand"} value={values[0]} />
       <Hand className={"sub_hand"} value={values[1]} />
     </div>
