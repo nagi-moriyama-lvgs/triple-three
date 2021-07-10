@@ -38,6 +38,20 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     ],
   ];
 
+  const [squares, setSquares] = useState<number[][]>(initialSquares);
+  //   [
+  //   [1, 2, 3],
+  //   [4, 5, 6],
+  //   [7, 8, 9],
+  // ]
+
+  let score = 0;
+  squares.forEach((row) => {
+    row.forEach((square) => {
+      if (!(square % 3 === 0)) score += square;
+    });
+  });
+
   // Adder
   const initializeAdderValues = [...Array(6)].map((_, index) => ({
     index: index,
@@ -45,26 +59,35 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   }));
   const [adderValues, setAdderValues] = useState(initializeAdderValues);
 
-  const resetAdder = () => {
-    const newAdderValues = [...Array(6)].map((_, index) => ({
+  type AdderType = {
+    index: number;
+    value: string;
+  };
+  const createEmptyAdder: () => AdderType[] = () => {
+    return [...Array(6)].map((_, index) => ({
       index: index,
       value: "",
     }));
-    setAdderValues(newAdderValues);
   };
+  const resetAdder = () => setAdderValues(createEmptyAdder());
 
   // Hands
-  const [hands, setHands] = useState([3, 7]);
+  const [hands, setHands] = useState<[number, number]>([
+    INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+    INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+  ]);
+
   const changeHands = () => {
     setHands([hands[1], hands[0]]);
-    // ======= adderを設定していないときにはindexがない！！！！=============
-    const [{ index }] = adderValues.filter(({ value }) => !!value);
-    const newAdderValues = [...Array(6)].map((_, index) => ({
-      index,
-      value: "",
-    }));
-    newAdderValues[index].value = `+${hands[1]}`;
-    setAdderValues(newAdderValues);
+
+    const adderArray = adderValues.filter(({ value }) => !!value); // adderを取得
+    // Handsの入れ替えに応じてAdderも入れ替え。
+    if (adderArray.length) {
+      const [{ index }] = adderArray;
+      const newAdderValues = createEmptyAdder();
+      newAdderValues[index].value = `+${hands[1]}`;
+      setAdderValues(newAdderValues);
+    }
   };
 
   const drawNewHand = () => {
@@ -74,28 +97,15 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     ]);
   };
 
-  // adderをクリックした時にvalueを差し替える
-  const onClickSelect = useCallback(
+  const inputHandOnAdder = useCallback(
     (event) => {
-      const newAdderValues = [...Array(6)].map((_, index) => ({
-        index: index,
-        value: "",
-      }));
+      const newAdderValues = createEmptyAdder();
       newAdderValues[event.currentTarget.dataset.index].value = `+${hands[0]}`;
       setAdderValues(newAdderValues);
     },
     [hands]
   );
 
-  // Squares
-  const [squares, setSquares] = useState<number[][]>(initialSquares);
-  //   [
-  //   [1, 2, 3],
-  //   [4, 5, 6],
-  //   [7, 8, 9],
-  // ]
-
-  // button
   const onClickCalculate = () => {
     const [index] = adderValues.filter(({ value }) => !!value);
     if (!!index) {
@@ -119,38 +129,30 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     }
   };
 
-  // Score
-  let score = 0;
-  squares.forEach((row) => {
-    row.forEach((square) => {
-      if (!(square % 3 === 0)) score += square;
-    });
-  });
-
   const [buttonState, setButtonState] = React.useState(false);
   // ゲームオーバーの確認
   if (!buttonState) {
-    let multipleOfThree = 0;
+    let inActiveSuqareCount = 0;
     squares.forEach((row) =>
       row.forEach((square) => {
-        if (square % 3 === 0) multipleOfThree++;
+        if (square % 3 === 0) inActiveSuqareCount++;
       })
     );
-    if (multipleOfThree >= GAMEOVER_COUNT) setButtonState(true);
+    if (inActiveSuqareCount >= GAMEOVER_COUNT) setButtonState(true);
   }
 
   return (
     <div className={className}>
       <div className={"empty_area"}></div>
       <div className={"top_area"}>
-        <Adder onClick={onClickSelect} {...adderValues[0]} />
-        <Adder onClick={onClickSelect} {...adderValues[1]} />
-        <Adder onClick={onClickSelect} {...adderValues[2]} />
+        <Adder onClick={inputHandOnAdder} {...adderValues[0]} />
+        <Adder onClick={inputHandOnAdder} {...adderValues[1]} />
+        <Adder onClick={inputHandOnAdder} {...adderValues[2]} />
       </div>
       <div className={"left_area"}>
-        <Adder onClick={onClickSelect} {...adderValues[3]} />
-        <Adder onClick={onClickSelect} {...adderValues[4]} />
-        <Adder onClick={onClickSelect} {...adderValues[5]} />
+        <Adder onClick={inputHandOnAdder} {...adderValues[3]} />
+        <Adder onClick={inputHandOnAdder} {...adderValues[4]} />
+        <Adder onClick={inputHandOnAdder} {...adderValues[5]} />
       </div>
       <div className={"main_area"}>
         <NineSquares defaultValues={squares} />
