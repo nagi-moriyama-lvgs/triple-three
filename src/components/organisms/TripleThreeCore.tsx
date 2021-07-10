@@ -5,7 +5,7 @@ import Button from "~/components/atoms/Button";
 import Score from "~/components/atoms/Score";
 import Hands from "~/components/molecules/Hands";
 import NineSquares from "~/components/molecules/NineSquares";
-import Square from "../atoms/Square";
+import Adders from "~/components/molecules/Adders";
 
 type BaseTripleThreeCoreProps = {
   className?: string;
@@ -123,34 +123,38 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   }
 
   return (
-    <div className={className}>
-      <div className={"empty_area"}></div>
-      <div className={"top_area"}>
-        <Adder onClick={inputHandOnAdder} {...adderValues[0]} />
-        <Adder onClick={inputHandOnAdder} {...adderValues[1]} />
-        <Adder onClick={inputHandOnAdder} {...adderValues[2]} />
+    <>
+      <div className={className}>
+        <div className={"empty_area"}></div>
+        <div className={"top_area"}>
+          <Adder onClick={inputHandOnAdder} {...adderValues[0]} />
+          <Adder onClick={inputHandOnAdder} {...adderValues[1]} />
+          <Adder onClick={inputHandOnAdder} {...adderValues[2]} />
+        </div>
+        <div className={"left_area"}>
+          <Adder onClick={inputHandOnAdder} {...adderValues[3]} />
+          <Adder onClick={inputHandOnAdder} {...adderValues[4]} />
+          <Adder onClick={inputHandOnAdder} {...adderValues[5]} />
+        </div>
+        <div className={"main_area"}>
+          <NineSquares defaultValues={squares} />
+        </div>
+        <div className={"hand_area"}>
+          <Hands values={hands} />
+        </div>
+        <div className={"button_area"}>
+          <Button onClick={onClickCalculate} disabled={buttonState} />
+          <Score number={score} />
+        </div>
       </div>
-      <div className={"left_area"}>
-        <Adder onClick={inputHandOnAdder} {...adderValues[3]} />
-        <Adder onClick={inputHandOnAdder} {...adderValues[4]} />
-        <Adder onClick={inputHandOnAdder} {...adderValues[5]} />
-      </div>
-      <div className={"main_area"}>
-        <NineSquares defaultValues={squares} />
-      </div>
-      <div className={"hand_area"}>
-        <Hands values={hands} />
-      </div>
-      <div className={"button_area"}>
-        <Button onClick={onClickCalculate} disabled={buttonState} />
-        <Score number={score} />
-      </div>
-    </div>
+      <Adders addersNumber={3} />
+    </>
   );
 };
 
 const TripleThreeCore = styled(BaseTripleThreeCore)`
   & {
+    margin-bottom: 100px;
     display: grid;
     grid-template-rows: 100px 300px 100px;
     grid-template-columns: 100px 200px 100px;

@@ -5,18 +5,20 @@ type BaseAdderProps = {
   className?: string;
   value?: string;
   index?: number;
+  active?: boolean;
   onClick?: (event: React.MouseEvent) => void;
 };
 
 const BaseAdder: React.FC<BaseAdderProps> = ({
   className,
   value,
-  onClick,
   index,
+  active = false,
+  onClick,
 }) => {
   return (
     <div className={className} onClick={onClick} data-index={index}>
-      <span>{value}</span>
+      {active && <span>{value}</span>}
     </div>
   );
 };
