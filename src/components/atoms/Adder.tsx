@@ -13,12 +13,11 @@ const BaseAdder: React.FC<BaseAdderProps> = ({
   className,
   value,
   index,
-  active = false,
   onClick,
 }) => {
   return (
     <div className={className} onClick={onClick} data-index={index}>
-      {active && <span>{value}</span>}
+      <span>{value}</span>
     </div>
   );
 };
@@ -31,6 +30,7 @@ const Adder = styled(BaseAdder)`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     span {
       font-size: 2rem;
     }

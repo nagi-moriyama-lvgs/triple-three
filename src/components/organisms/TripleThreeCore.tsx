@@ -5,7 +5,6 @@ import Button from "~/components/atoms/Button";
 import Score from "~/components/atoms/Score";
 import Hands from "~/components/molecules/Hands";
 import NineSquares from "~/components/molecules/NineSquares";
-import Adders from "~/components/molecules/Adders";
 
 type BaseTripleThreeCoreProps = {
   className?: string;
@@ -63,8 +62,10 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       value: "",
     }));
   };
-  const [adderValues, setAdderValues] = useState(createEmptyAdder());
-  const resetAdder = () => setAdderValues(createEmptyAdder());
+  const [adderValues, setAdderValues] = useState<AdderType[]>(
+    createEmptyAdder()
+  );
+  const resetAdder = (): void => setAdderValues(createEmptyAdder());
 
   // Hands
   const [hands, setHands] = useState<[number, number]>([
@@ -123,32 +124,29 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   }
 
   return (
-    <>
-      <div className={className}>
-        <div className={"empty_area"}></div>
-        <div className={"top_area"}>
-          <Adder onClick={inputHandOnAdder} {...adderValues[0]} />
-          <Adder onClick={inputHandOnAdder} {...adderValues[1]} />
-          <Adder onClick={inputHandOnAdder} {...adderValues[2]} />
-        </div>
-        <div className={"left_area"}>
-          <Adder onClick={inputHandOnAdder} {...adderValues[3]} />
-          <Adder onClick={inputHandOnAdder} {...adderValues[4]} />
-          <Adder onClick={inputHandOnAdder} {...adderValues[5]} />
-        </div>
-        <div className={"main_area"}>
-          <NineSquares defaultValues={squares} />
-        </div>
-        <div className={"hand_area"}>
-          <Hands values={hands} />
-        </div>
-        <div className={"button_area"}>
-          <Button onClick={onClickCalculate} disabled={buttonState} />
-          <Score number={score} />
-        </div>
+    <div className={className}>
+      <div className={"empty_area"}></div>
+      <div className={"top_area"}>
+        <Adder onClick={inputHandOnAdder} {...adderValues[0]} />
+        <Adder onClick={inputHandOnAdder} {...adderValues[1]} />
+        <Adder onClick={inputHandOnAdder} {...adderValues[2]} />
       </div>
-      <Adders addersNumber={3} />
-    </>
+      <div className={"left_area"}>
+        <Adder onClick={inputHandOnAdder} {...adderValues[3]} />
+        <Adder onClick={inputHandOnAdder} {...adderValues[4]} />
+        <Adder onClick={inputHandOnAdder} {...adderValues[5]} />
+      </div>
+      <div className={"main_area"}>
+        <NineSquares defaultValues={squares} />
+      </div>
+      <div className={"hand_area"}>
+        <Hands values={hands} />
+      </div>
+      <div className={"button_area"}>
+        <Button onClick={onClickCalculate} disabled={buttonState} />
+        <Score number={score} />
+      </div>
+    </div>
   );
 };
 
