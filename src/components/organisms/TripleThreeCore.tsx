@@ -12,7 +12,6 @@ type BaseTripleThreeCoreProps = {
 
 // local storageでbestスコアを表示
 // local storageで現在の状態を保持
-// resetボタンを作成
 
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
@@ -123,6 +122,11 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     if (inActiveSuqareCount >= GAMEOVER_COUNT) setButtonState(true);
   }
 
+  const reset = () => {
+    setSquares(initialSquares);
+    setAdderValues(createEmptyAdder);
+  };
+
   return (
     <div className={className}>
       <div className={"empty_area"}></div>
@@ -143,7 +147,12 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         <Hands values={hands} />
       </div>
       <div className={"button_area"}>
-        <Button onClick={onClickCalculate} disabled={buttonState} />
+        <Button
+          onClick={onClickCalculate}
+          disabled={buttonState}
+          value={"Add"}
+        />
+        <Button onClick={reset} value={"reset"} />
         <Score number={score} />
       </div>
     </div>
