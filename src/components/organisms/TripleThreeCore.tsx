@@ -11,7 +11,6 @@ type BaseTripleThreeCoreProps = {
 };
 
 // local storageでbestスコアを表示
-// local storageで現在の状態を保持
 
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
@@ -52,7 +51,15 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     });
   });
 
-  // SquaresをlocalStrageに格納
+  const localStorageBestScore = Number(localStorage.getItem("best"));
+  const bestScore =
+    localStorageBestScore > score ? localStorageBestScore : score;
+  // bestをlocalStorageに格納
+  const setBestOnLocalStorage = (score: number) => {
+    localStorage.setItem("best", String(score));
+  };
+
+  // SquaresをlocalStorageに格納
   const setSquaresOnLocalStorage = (squares: number[][]) => {
     localStorage.setItem("squares", JSON.stringify(squares));
   };
@@ -130,6 +137,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       drawNewHand();
       setSquares(newSquareValues);
       setSquaresOnLocalStorage(newSquareValues);
+      setBestOnLocalStorage(bestScore);
     } else {
       alert("choose any rows or columns.");
     }
@@ -181,6 +189,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         />
         <Button onClick={reset} value={"reset"} />
         <Score number={score} />
+        <div>best score is {bestScore}</div>
       </div>
     </div>
   );
