@@ -16,6 +16,7 @@ type BaseTripleThreeCoreProps = {
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
 }) => {
+  // 初期値の定義
   const GAMEOVER_COUNT = 3;
   const INITIAL_VALUES = [1, 2, 4, 5, 7, 8];
   const initialSquares: number[][] = [
@@ -35,20 +36,30 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
     ],
   ];
-
-  const [squares, setSquares] = useState<number[][]>(initialSquares);
+  const localStorageSquares = JSON.parse(localStorage.getItem("squares")!);
+  const [squares, setSquares] = useState<number[][]>(
+    localStorageSquares || initialSquares
+  );
   //   [
   //   [1, 2, 3],
   //   [4, 5, 6],
   //   [7, 8, 9],
   // ]
-
   let score = 0;
   squares.forEach((row) => {
     row.forEach((square) => {
       if (!(square % 3 === 0)) score += square;
     });
   });
+
+  // SquaresをlocalStrageに格納
+  const setSquaresOnLocalStorage = (squares: number[][]) => {
+    localStorage.setItem("squares", JSON.stringify(squares));
+  };
+  // handsをlocalStorageに格納
+  const setHandsOnLocalStorage = (hands: [number, number]) => {
+    localStorage.setItem("hands", JSON.stringify(hands));
+  };
 
   // Adder
   type AdderType = {
@@ -67,17 +78,30 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   const resetAdder = (): void => setAdderValues(createEmptyAdder());
 
   // Hands
-  const [hands, setHands] = useState<[number, number]>([
-    INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
-    INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
-  ]);
+  const localStorageHands = JSON.parse(localStorage.getItem("hands")!);
+  const [hands, setHands] = useState<[number, number]>(
+    (localStorageSquares && localStorageHands) || [
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+      INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
+    ]
+  );
+  const changeHands = () => {
+    setHands([hands[1], hands[0]]);
+    setHandsOnLocalStorage([hands[1], hands[0]]);
+    const [index] = adderValues.filter(({ value }) => !!value);
+    if (!!index) {
+      const adderIndex = index.index;
+      const newAdderValues = createEmptyAdder();
+      newAdderValues[adderIndex].value = `+${hands[1]}`;
+      setAdderValues(newAdderValues);
+    }
+  };
   const drawNewHand = () => {
     setHands([
       hands[1],
       INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
     ]);
   };
-
   const inputHandOnAdder = useCallback(
     (event) => {
       const newAdderValues = createEmptyAdder();
@@ -105,6 +129,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
       resetAdder();
       drawNewHand();
       setSquares(newSquareValues);
+      setSquaresOnLocalStorage(newSquareValues);
     } else {
       alert("choose any rows or columns.");
     }
@@ -125,6 +150,8 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   const reset = () => {
     setSquares(initialSquares);
     setAdderValues(createEmptyAdder);
+    localStorage.removeItem("squares");
+    localStorage.removeItem("hands");
   };
 
   return (
@@ -144,7 +171,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         <NineSquares defaultValues={squares} />
       </div>
       <div className={"hand_area"}>
-        <Hands values={hands} />
+        <Hands values={hands} onClick={changeHands} />
       </div>
       <div className={"button_area"}>
         <Button
