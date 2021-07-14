@@ -23,6 +23,16 @@ const BaseButton: React.FC<BaseButtonProps> = ({
 
 const Button = styled(BaseButton)`
   & {
+    button {
+      width: 5rem;
+      height: 2rem;
+      color: #7fffd4;
+      background-color: #27292b;
+      border: none;
+      border-radius: 4px;
+      outline: none;
+      font-weight: bold;
+    }
   }
 `;
 

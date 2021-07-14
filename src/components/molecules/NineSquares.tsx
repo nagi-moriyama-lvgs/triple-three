@@ -28,8 +28,8 @@ const BaseNineSquares: React.FC<BaseNineSquaresProps> = ({
 
 const NineSquares = styled(BaseNineSquares)`
   & {
-    width: 15rem;
-    border: 1px solid lightgray;
+    width: 21rem;
+    border: 3px solid #37383b;
     .flex {
       display: flex;
     }

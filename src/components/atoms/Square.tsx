@@ -18,18 +18,20 @@ const BaseSquare: React.FC<BaseSquareProps> = ({ className, number }) => {
 
 const Square = styled(BaseSquare)`
   & {
-    width: 5rem;
-    height: 5rem;
-    border: 1px solid lightgray;
+    width: 7rem;
+    height: 7rem;
+    box-sizing: border-box;
+    background-color: #27292b;
+    border: 5px solid #37383b;
     display: flex;
     justify-content: center;
     align-items: center;
     span {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
   &.disable {
-    background-color: red;
+    background-color: #fa8072;
   }
 `;
 
