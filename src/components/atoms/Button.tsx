@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import styled from "styled-components";
+import CssConst from "~/consts/CssConst";
 
 type BaseButtonProps = {
   className?: string;
@@ -26,8 +27,8 @@ const Button = styled(BaseButton)`
     button {
       width: 5rem;
       height: 2rem;
-      color: #7fffd4;
-      background-color: #27292b;
+      color: ${CssConst.COLOR.PRIMARY};
+      background-color: ${CssConst.COLOR.DARKGRAY};
       border: none;
       border-radius: 4px;
       outline: none;
