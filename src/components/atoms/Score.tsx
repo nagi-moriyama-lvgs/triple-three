@@ -23,10 +23,10 @@ const BaseScore: React.FC<BaseScoreProps> = ({
 
 export const Score = memo<BaseScoreProps>(styled(BaseScore)`
   & {
-    width: ${CC.SIZE * 10}px;
+    width: ${CC.SIZE * 20}px;
     height: ${CC.SIZE * 10}px;
     border-radius: 4px;
-    background-color: ${CC.COLOR.PRIMARY};
+    background-color: ${CC.COLOR.DARKPRIMARY};
     display: flex;
     flex-direction: column;
     justify-content: center;

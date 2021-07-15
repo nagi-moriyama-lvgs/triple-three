@@ -25,8 +25,8 @@ const BaseButton: React.FC<BaseButtonProps> = ({
 export const Button = memo<BaseButtonProps>(styled(BaseButton)`
   & {
     button {
-      width: ${CC.SIZE * 10}px;
-      height: ${CC.SIZE * 5}px;
+      width: ${CC.SIZE * 15}px;
+      height: ${CC.SIZE * 7}px;
       color: ${CC.COLOR.PRIMARY};
       background-color: ${CC.COLOR.DARKGRAY};
       border: none;

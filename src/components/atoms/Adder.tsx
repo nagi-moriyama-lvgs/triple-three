@@ -33,7 +33,7 @@ export const Adder = memo<BaseAdderProps>(styled(BaseAdder)`
     align-items: center;
     cursor: pointer;
     span {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
 `);

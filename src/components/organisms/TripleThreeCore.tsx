@@ -186,6 +186,8 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
           value={"Add"}
         />
         <Button onClick={reset} value={"reset"} />
+      </div>
+      <div className={"score_area"}>
         <Score number={score} />
         <div>best score is {bestScore}</div>
       </div>
@@ -203,7 +205,7 @@ const TripleThreeCore = styled(BaseTripleThreeCore)`
       ${CC.SIZE * 20}px;
     grid-template-columns:
       ${CC.SIZE * 20}px
-      ${CC.SIZE * 30}px
+      ${CC.SIZE * 50}px
       ${CC.SIZE * 20}px;
     .empty_area {
       grid-row: 1 / 2;
@@ -213,25 +215,47 @@ const TripleThreeCore = styled(BaseTripleThreeCore)`
       grid-row: 1 / 2;
       grid-column: 2 / 3;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 ${CC.SIZE * 4}px;
     }
     .left_area {
       grid-row: 2 / 3;
       grid-column: 1 / 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: ${CC.SIZE * 4}px 0;
     }
     .main_area {
       grid-row: 2 / 3;
-      grid-column: 2 / 4;
+      grid-column: 2 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .hand_area {
       grid-row: 3 / 4;
       grid-column: 2 / 3;
       display: flex;
+      padding-top: ${CC.SIZE * 4}px;
+      align-items: center;
+      justify-content: center;
       .hand {
         cursor: pointer;
       }
     }
     .button_area {
       grid-row: 3 / 4;
+      grid-column: 3 / 4;
+      button {
+        margin-top: ${CC.SIZE * 3}px;
+      }
+    }
+
+    .score_area {
+      grid-row: 1 / 2;
       grid-column: 3 / 4;
     }
   }
