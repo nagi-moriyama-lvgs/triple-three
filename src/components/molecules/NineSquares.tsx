@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import styled from "styled-components";
-import Square from "~/components/atoms/Square";
+import { Square } from "~/components/atoms";
+import * as CC from "~/consts";
 
 type BaseNineSquaresProps = {
   className?: string;
@@ -26,14 +27,12 @@ const BaseNineSquares: React.FC<BaseNineSquaresProps> = ({
   return <div className={className}>{Squares}</div>;
 };
 
-const NineSquares = styled(BaseNineSquares)`
+export const NineSquares = memo<BaseNineSquaresProps>(styled(BaseNineSquares)`
   & {
-    width: 21rem;
-    border: 3px solid #37383b;
+    width: ${CC.SIZE * 45}px;
+    border: 3px solid ${CC.COLOR.GRAY};
     .flex {
       display: flex;
     }
   }
-`;
-
-export default memo<BaseNineSquaresProps>(NineSquares);
+`);

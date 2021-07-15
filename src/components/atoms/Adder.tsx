@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import styled from "styled-components";
+import * as CC from "~/consts";
 
 type BaseAdderProps = {
   className?: string;
@@ -22,11 +23,11 @@ const BaseAdder: React.FC<BaseAdderProps> = ({
   );
 };
 
-const Adder = styled(BaseAdder)`
+export const Adder = memo<BaseAdderProps>(styled(BaseAdder)`
   & {
-    width: 3rem;
-    height: 3rem;
-    border: 1px solid lightgray;
+    width: ${CC.SIZE * 10}px;
+    height: ${CC.SIZE * 10}px;
+    border: 3px solid ${CC.COLOR.GRAY};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,6 +36,4 @@ const Adder = styled(BaseAdder)`
       font-size: 2rem;
     }
   }
-`;
-
-export default memo<BaseAdderProps>(Adder);
+`);

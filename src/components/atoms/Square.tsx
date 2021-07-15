@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 import clsx from "clsx";
+import * as CC from "~/consts";
 
 type BaseSquareProps = {
   className?: string;
@@ -16,23 +17,22 @@ const BaseSquare: React.FC<BaseSquareProps> = ({ className, number }) => {
   );
 };
 
-const Square = styled(BaseSquare)`
+export const Square = memo<BaseSquareProps>(styled(BaseSquare)`
   & {
-    width: 7rem;
-    height: 7rem;
+    width: ${CC.SIZE * 15}px;
+    height: ${CC.SIZE * 15}px;
     box-sizing: border-box;
-    background-color: #27292b;
-    border: 5px solid #37383b;
+    background-color: ${CC.COLOR.DARKGRAY};
+    border: 5px solid ${CC.COLOR.GRAY};
     display: flex;
     justify-content: center;
     align-items: center;
+
     span {
       font-size: 1.5rem;
     }
   }
   &.disable {
-    background-color: #fa8072;
+    background-color: ${CC.COLOR.ERROR};
   }
-`;
-
-export default memo<BaseSquareProps>(Square);
+`);

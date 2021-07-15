@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
 import styled from "styled-components";
-import Hand from "~/components/atoms/Hand";
-import ChangeIcon from "../atoms/ChangeIcon";
+import { Hand, ChangeIcon } from "~/components/atoms";
+import * as CC from "~/consts";
 
 type BaseHandsProps = {
   className?: string;
@@ -23,31 +23,31 @@ const BaseHands: React.FC<BaseHandsProps> = ({
   );
 };
 
-const Hands = styled(BaseHands)`
+export const Hands = memo<BaseHandsProps>(styled(BaseHands)`
   & {
     position: relative;
-    width: 9rem;
-    height: 8rem;
+    width: ${CC.SIZE * 20}px;
+    height: ${CC.SIZE * 20}px;
     .main_hand {
       position: absolute;
       top: 0;
-      width: 5rem;
-      height: 5rem;
+      width: ${CC.SIZE * 10}px;
+      height: ${CC.SIZE * 10}px;
     }
     .sub_hand {
       position: absolute;
       right: 0;
       bottom: 0;
+      width: ${CC.SIZE * 7}px;
+      height: ${CC.SIZE * 7}px;
     }
     svg {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 2rem;
-      height: 2rem;
+      top: ${CC.SIZE * 3}px;
+      right: ${CC.SIZE * 2}px;
+      width: ${CC.SIZE * 5}px;
+      height: ${CC.SIZE * 5}px;
       cursor: pointer;
     }
   }
-`;
-
-export default memo<BaseHandsProps>(Hands);
+`);

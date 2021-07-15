@@ -1,6 +1,6 @@
 import React from "react";
 
-const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => {
+export const ChangeIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       version="1.1"
@@ -25,5 +25,3 @@ const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => {
     </svg>
   );
 };
-
-export default CheckIcon;

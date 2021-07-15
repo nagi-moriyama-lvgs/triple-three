@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import styled from "styled-components";
+import * as CC from "~/consts";
 
 type BaseScoreProps = {
   className?: string;
@@ -20,12 +21,12 @@ const BaseScore: React.FC<BaseScoreProps> = ({
   );
 };
 
-const Score = styled(BaseScore)`
+export const Score = memo<BaseScoreProps>(styled(BaseScore)`
   & {
-    width: 5rem;
-    height: 5rem;
+    width: ${CC.SIZE * 10}px;
+    height: ${CC.SIZE * 10}px;
     border-radius: 4px;
-    background-color: skyblue;
+    background-color: ${CC.COLOR.PRIMARY};
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,6 +36,4 @@ const Score = styled(BaseScore)`
       font-weight: bold;
     }
   }
-`;
-
-export default memo<BaseScoreProps>(Score);
+`);

@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import styled from "styled-components";
+import * as CC from "~/consts";
 
 type BaseHandProps = {
   className?: string;
@@ -14,18 +15,16 @@ const BaseHand: React.FC<BaseHandProps> = ({ className, value }) => {
   );
 };
 
-const Hand = styled(BaseHand)`
+export const Hand = memo<BaseHandProps>(styled(BaseHand)`
   & {
-    width: 3rem;
-    height: 3rem;
-    border: 1px solid lightgray;
+    width: ${CC.SIZE * 10}px;
+    height: ${CC.SIZE * 10}px;
+    border: 3px solid ${CC.COLOR.GRAY};
     display: flex;
     justify-content: center;
     align-items: center;
     span {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
-`;
-
-export default memo<BaseHandProps>(Hand);
+`);

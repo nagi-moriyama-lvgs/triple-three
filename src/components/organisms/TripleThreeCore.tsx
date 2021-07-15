@@ -1,10 +1,8 @@
-import React, { memo, useState, useCallback, useRef } from "react";
+import React, { memo, useState, useCallback } from "react";
 import styled from "styled-components";
-import Adder from "~/components/atoms/Adder";
-import Button from "~/components/atoms/Button";
-import Score from "~/components/atoms/Score";
-import Hands from "~/components/molecules/Hands";
-import NineSquares from "~/components/molecules/NineSquares";
+import { Adder, Button, Score } from "~/components/atoms";
+import { Hands, NineSquares } from "~/components/molecules";
+import * as CC from "~/consts";
 
 type BaseTripleThreeCoreProps = {
   className?: string;
@@ -199,8 +197,14 @@ const TripleThreeCore = styled(BaseTripleThreeCore)`
   & {
     margin-bottom: 100px;
     display: grid;
-    grid-template-rows: 100px 300px 100px;
-    grid-template-columns: 100px 200px 100px;
+    grid-template-rows:
+      ${CC.SIZE * 20}px
+      ${CC.SIZE * 50}px
+      ${CC.SIZE * 20}px;
+    grid-template-columns:
+      ${CC.SIZE * 20}px
+      ${CC.SIZE * 30}px
+      ${CC.SIZE * 20}px;
     .empty_area {
       grid-row: 1 / 2;
       grid-column: 1 / 2;
