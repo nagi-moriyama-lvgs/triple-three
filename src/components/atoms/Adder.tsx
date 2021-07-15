@@ -27,6 +27,7 @@ export const Adder = memo<BaseAdderProps>(styled(BaseAdder)`
   & {
     width: ${CC.SIZE * 10}px;
     height: ${CC.SIZE * 10}px;
+    background-color: ${CC.COLOR.DARKGRAY};
     border: 3px solid ${CC.COLOR.GRAY};
     display: flex;
     justify-content: center;
