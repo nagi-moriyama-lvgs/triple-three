@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import styled from "styled-components";
 import clsx from "clsx";
 import * as CC from "~/consts";
@@ -17,7 +17,7 @@ const BaseSquare: React.FC<BaseSquareProps> = ({ className, number }) => {
   );
 };
 
-export const Square = memo<BaseSquareProps>(styled(BaseSquare)`
+export const Square = styled(BaseSquare)`
   & {
     width: ${CC.SIZE * 15}px;
     height: ${CC.SIZE * 15}px;
@@ -35,4 +35,4 @@ export const Square = memo<BaseSquareProps>(styled(BaseSquare)`
   &.disable {
     background-color: ${CC.COLOR.ERROR};
   }
-`);
+`;

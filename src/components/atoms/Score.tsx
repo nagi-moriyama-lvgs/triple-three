@@ -21,7 +21,7 @@ const BaseScore: React.FC<BaseScoreProps> = ({
   );
 };
 
-export const Score = memo<BaseScoreProps>(styled(BaseScore)`
+export const Score = styled(BaseScore)`
   & {
     width: ${CC.SIZE * 20}px;
     height: ${CC.SIZE * 10}px;
@@ -36,4 +36,4 @@ export const Score = memo<BaseScoreProps>(styled(BaseScore)`
       font-weight: bold;
     }
   }
-`);
+`;

@@ -5,18 +5,18 @@ import * as CC from "~/consts";
 
 type BaseNineSquaresProps = {
   className?: string;
-  defaultValues?: Array<Array<number>>;
+  values?: Array<Array<number>>;
 };
 
 const BaseNineSquares: React.FC<BaseNineSquaresProps> = ({
   className,
-  defaultValues = [
+  values = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9],
   ],
 }) => {
-  const Squares = defaultValues.map((rowArray, i) => (
+  const Squares = values.map((rowArray, i) => (
     <div className={"flex"} key={i}>
       {rowArray.map((squareNumber, j) => (
         <Square number={squareNumber} key={`${i}-${j}`} />
@@ -30,6 +30,7 @@ const BaseNineSquares: React.FC<BaseNineSquaresProps> = ({
 export const NineSquares = memo<BaseNineSquaresProps>(styled(BaseNineSquares)`
   & {
     width: ${CC.SIZE * 45}px;
+    height: ${CC.SIZE * 45}px;
     border: 10px solid ${CC.COLOR.GRAY};
     .flex {
       display: flex;

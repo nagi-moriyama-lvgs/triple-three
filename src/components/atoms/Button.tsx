@@ -1,28 +1,28 @@
-import React, { memo } from "react";
+import React from "react";
 import styled from "styled-components";
 import * as CC from "~/consts";
 
 type BaseButtonProps = {
   className?: string;
-  value: string;
+  buttonText: string;
   disabled?: boolean;
   onClick: () => void;
 };
 
 const BaseButton: React.FC<BaseButtonProps> = ({
   className,
-  value,
+  buttonText,
   disabled,
   onClick,
 }) => {
   return (
     <div className={className} onClick={onClick}>
-      <button disabled={disabled}>{value}</button>
+      <button disabled={disabled}>{buttonText}</button>
     </div>
   );
 };
 
-export const Button = memo<BaseButtonProps>(styled(BaseButton)`
+export const Button = styled(BaseButton)`
   & {
     button {
       width: ${CC.SIZE * 15}px;
@@ -34,4 +34,4 @@ export const Button = memo<BaseButtonProps>(styled(BaseButton)`
       font-weight: bold;
     }
   }
-`);
+`;

@@ -12,6 +12,7 @@ type BaseHandsProps = {
 const BaseHands: React.FC<BaseHandsProps> = ({
   className,
   values,
+
   onClick,
 }) => {
   return (

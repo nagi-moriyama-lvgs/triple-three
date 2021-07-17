@@ -1,12 +1,8 @@
 import React from "react";
-import TripleThreeCore from "./components/organisms/TripleThreeCore";
+import Main from "~/components/pages/Main";
 
 const App = () => {
-  return (
-    <>
-      <TripleThreeCore />
-    </>
-  );
+  return <Main />;
 };
 
 export default App;

@@ -160,7 +160,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   return (
     <div className={className}>
       <div className={"empty_area"}></div>
-      <div className={"top_area"}>
+      {/* <div className={"top_area"}>
         <Adder onClick={inputHandOnAdder} {...adderValues[0]} />
         <Adder onClick={inputHandOnAdder} {...adderValues[1]} />
         <Adder onClick={inputHandOnAdder} {...adderValues[2]} />
@@ -169,9 +169,9 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         <Adder onClick={inputHandOnAdder} {...adderValues[3]} />
         <Adder onClick={inputHandOnAdder} {...adderValues[4]} />
         <Adder onClick={inputHandOnAdder} {...adderValues[5]} />
-      </div>
+      </div> */}
       <div className={"main_area"}>
-        <NineSquares defaultValues={squares} />
+        <NineSquares values={squares} />
       </div>
       <div className={"hand_area"}>
         <Hands values={hands} onClick={changeHands} />
@@ -180,9 +180,9 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
         <Button
           onClick={onClickCalculate}
           disabled={buttonState}
-          value={"Add"}
+          buttonText="Add"
         />
-        <Button onClick={reset} value={"reset"} />
+        <Button onClick={reset} buttonText="reset" />
       </div>
       <div className={"score_area"}>
         <Score number={score} />

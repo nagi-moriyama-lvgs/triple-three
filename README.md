@@ -19,25 +19,3 @@ touch src/index.tsx
 ```
 npm install --save-dev styled-components @types/styled-components
 ```
-
-#　各コンポーネントの責務
-
-## Square
-
-```
-type BaseSquareProps = {
-  className?: string;
-  number: number;
-};
-```
-
-・props で渡された数値を描画。
-・props で渡された数値が 3 の倍数であればエラーデザインを描画
-
-## NineSquare
-
-・Square を 9 つ正方形に描画
-
-## Adder
-
-・クリックされたら props で渡された値を描画

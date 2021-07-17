@@ -1,29 +1,28 @@
-import React, { memo } from "react";
+import React from "react";
 import styled from "styled-components";
 import * as CC from "~/consts";
 
 type BaseAdderProps = {
   className?: string;
-  value?: string;
-  index?: number;
-  active?: boolean;
-  onClick?: (event: React.MouseEvent) => void;
+  index: number;
+  value: number;
+  onClick: (event: React.MouseEvent) => void;
 };
 
 const BaseAdder: React.FC<BaseAdderProps> = ({
   className,
-  value,
   index,
+  value,
   onClick,
 }) => {
   return (
     <div className={className} onClick={onClick} data-index={index}>
-      <span>{value}</span>
+      <span>{value === 0 || `+${value}`}</span>
     </div>
   );
 };
 
-export const Adder = memo<BaseAdderProps>(styled(BaseAdder)`
+export const Adder = styled(BaseAdder)`
   & {
     width: ${CC.SIZE * 10}px;
     height: ${CC.SIZE * 10}px;
@@ -37,4 +36,4 @@ export const Adder = memo<BaseAdderProps>(styled(BaseAdder)`
       font-size: 1.5rem;
     }
   }
-`);
+`;
