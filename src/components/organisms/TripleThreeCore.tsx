@@ -64,7 +64,6 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
     localStorage.setItem("hands", JSON.stringify(hands));
   };
 
-  // Adder
   type AdderType = {
     index: number;
     value: string;
@@ -78,7 +77,7 @@ const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   const [adderValues, setAdderValues] = useState<AdderType[]>(
     createEmptyAdder()
   );
-  const resetAdder = (): void => setAdderValues(createEmptyAdder());
+  const resetAdder = () => setAdderValues(createEmptyAdder());
 
   // Hands
   const localStorageHands = JSON.parse(localStorage.getItem("hands")!);
