@@ -8,8 +8,6 @@ type BaseTripleThreeCoreProps = {
   className?: string;
 };
 
-// local storageでbestスコアを表示
-
 const BaseTripleThreeCore: React.FC<BaseTripleThreeCoreProps> = ({
   className,
 }) => {

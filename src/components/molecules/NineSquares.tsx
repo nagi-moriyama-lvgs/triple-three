@@ -30,7 +30,7 @@ const BaseNineSquares: React.FC<BaseNineSquaresProps> = ({
 export const NineSquares = memo<BaseNineSquaresProps>(styled(BaseNineSquares)`
   & {
     width: ${CC.SIZE * 45}px;
-    border: 3px solid ${CC.COLOR.GRAY};
+    border: 10px solid ${CC.COLOR.GRAY};
     .flex {
       display: flex;
     }
