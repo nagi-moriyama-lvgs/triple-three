@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import styled from "styled-components";
 import * as CC from "~/consts";
 
@@ -15,24 +15,25 @@ const BaseScore: React.FC<BaseScoreProps> = ({
 }) => {
   return (
     <div className={className}>
-      <span>{label}</span>
-      <span>{number}</span>
+      <span className={"label"}>{label}</span>
+      <span className={"score"}>{number}</span>
     </div>
   );
 };
 
 export const Score = styled(BaseScore)`
   & {
-    width: ${CC.SIZE * 20}px;
+    width: ${CC.SIZE * 10}px;
     height: ${CC.SIZE * 10}px;
     border-radius: 4px;
-    background-color: ${CC.COLOR.DARKPRIMARY};
+    background-color: ${CC.COLOR.GRAY};
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    span {
-      color: white;
+    .label {
+      color: ${CC.COLOR.PRIMARY};
+      font-size: ${CC.SIZE * 1.5}px;
       font-weight: bold;
     }
   }

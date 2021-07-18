@@ -31,7 +31,14 @@ export const Button = styled(BaseButton)`
       background-color: ${CC.COLOR.DARKGRAY};
       border: none;
       border-radius: 4px;
+      font-size: ${CC.SIZE * 2}px;
       font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      :disabled {
+        cursor: initial;
+        color: ${CC.COLOR.GRAY};
+      }
     }
   }
 `;

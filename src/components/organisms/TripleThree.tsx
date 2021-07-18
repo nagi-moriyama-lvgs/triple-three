@@ -10,6 +10,7 @@ export type BaseTripleThreeProps = {
   adders: number[];
   squares: number[][];
   hands: [number, number];
+  buttonDisable: boolean;
   onClickAdder: (event: React.MouseEvent) => void;
   onClickChangeHands: () => void;
   onClickAddButton: () => void;
@@ -20,6 +21,7 @@ const BaseTripleThree: React.FC<BaseTripleThreeProps> = ({
   adders,
   squares,
   hands,
+  buttonDisable,
   onClickAdder,
   onClickChangeHands,
   onClickAddButton,
@@ -35,7 +37,11 @@ const BaseTripleThree: React.FC<BaseTripleThreeProps> = ({
       </div>
       <div className={"bottom_area area"}>
         <Hands values={hands} onClick={onClickChangeHands} />
-        <Button buttonText={"Add"} onClick={onClickAddButton} />
+        <Button
+          buttonText={"Add"}
+          onClick={onClickAddButton}
+          disabled={buttonDisable}
+        />
       </div>
     </div>
   );
@@ -47,11 +53,10 @@ const TripleThree = styled(BaseTripleThree)`
     grid-template-rows:
       ${CC.SIZE * 20}px
       ${CC.SIZE * 50}px
-      ${CC.SIZE * 20}px;
+      ${CC.SIZE * 30}px;
     grid-template-columns:
       ${CC.SIZE * 20}px
-      ${CC.SIZE * 50}px
-      ${CC.SIZE * 20}px;
+      ${CC.SIZE * 50}px;
 
     .area {
       display: flex;
@@ -81,7 +86,10 @@ const TripleThree = styled(BaseTripleThree)`
     .bottom_area {
       grid-row: 3 / 4;
       grid-column: 2 / 3;
-      padding: ${CC.SIZE * 4}px;
+      padding: ${CC.SIZE * 1}px;
+      button {
+        height: ${CC.SIZE * 15}px;
+      }
     }
   }
 `;

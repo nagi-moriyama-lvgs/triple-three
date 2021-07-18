@@ -3,5 +3,7 @@ export const COLOR = {
   DARKPRIMARY: "#66CDAA",
   DARKGRAY: "#27292B",
   GRAY: "#37383B",
+  LIGHTGRAY: "#DCDCDC",
   ERROR: "#FA8072",
+  WHITE: "#F5F5F5",
 } as const;
