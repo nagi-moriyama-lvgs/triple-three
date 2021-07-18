@@ -6,4 +6,5 @@ export const COLOR = {
   LIGHTGRAY: "#DCDCDC",
   ERROR: "#FA8072",
   WHITE: "#F5F5F5",
+  MODAL_BACK: "rgba(0, 0, 0, 0.3)",
 } as const;

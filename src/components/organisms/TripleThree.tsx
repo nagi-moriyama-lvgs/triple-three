@@ -47,7 +47,7 @@ const BaseTripleThree: React.FC<BaseTripleThreeProps> = ({
   );
 };
 
-const TripleThree = styled(BaseTripleThree)`
+export const TripleThree = memo<BaseTripleThreeProps>(styled(BaseTripleThree)`
   & {
     display: grid;
     grid-template-rows:
@@ -92,6 +92,4 @@ const TripleThree = styled(BaseTripleThree)`
       }
     }
   }
-`;
-
-export default memo<BaseTripleThreeProps>(TripleThree);
+`);

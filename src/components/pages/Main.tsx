@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { Score, Button } from "~/components/atoms";
-import TripleThree from "~/components/organisms/TripleThree";
+import { TripleThree, GameOverModal } from "~/components/organisms";
 import * as CC from "~/consts";
 
 type BaseMainProps = {
@@ -36,6 +36,22 @@ const BaseMain: React.FC<BaseMainProps> = ({ className }) => {
   const localStorageBestScore = Number(localStorage.getItem("best"));
   const bestScore =
     localStorageBestScore > score ? localStorageBestScore : score;
+
+  // game over
+  const isGameOver: (squares: squaresType) => boolean = (squares) => {
+    let inActiveSuqareCount = 0;
+    squares.forEach((row) =>
+      row.forEach((square) => {
+        if (square % 3 === 0) inActiveSuqareCount++;
+      })
+    );
+    if (inActiveSuqareCount >= 3) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const [gameOver, setGameOver] = useState(isGameOver(squares));
 
   // adders
   const [adders, setAdders] = useState<number[]>([0, 0, 0, 0, 0, 0]);
@@ -102,6 +118,7 @@ const BaseMain: React.FC<BaseMainProps> = ({ className }) => {
       const newHands = drawNewHand();
       localStorage.setItem("squares", JSON.stringify(newSquares));
       localStorage.setItem("hands", JSON.stringify(newHands));
+      setGameOver(isGameOver(newSquares));
     } else {
       alert("加算する値をAdderにセットしてください。");
     }
@@ -117,23 +134,8 @@ const BaseMain: React.FC<BaseMainProps> = ({ className }) => {
       INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
       INITIAL_VALUES[Math.floor(Math.random() * INITIAL_VALUES.length)],
     ]);
+    setGameOver(false);
   };
-
-  // game over
-  const isGameOver: (squares: squaresType) => boolean = (squares) => {
-    let inActiveSuqareCount = 0;
-    squares.forEach((row) =>
-      row.forEach((square) => {
-        if (square % 3 === 0) inActiveSuqareCount++;
-      })
-    );
-    if (inActiveSuqareCount >= 3) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const buttonDisable = isGameOver(squares);
 
   return (
     <div className={className}>
@@ -150,13 +152,18 @@ const BaseMain: React.FC<BaseMainProps> = ({ className }) => {
         </div>
       </div>
 
-      {buttonDisable && <p>game over</p>}
+      <GameOverModal
+        open={gameOver}
+        score={score}
+        setState={setGameOver}
+        onClick={onClickNewGame}
+      />
 
       <TripleThree
         adders={adders}
         hands={hands}
         squares={squares}
-        buttonDisable={buttonDisable}
+        buttonDisable={gameOver}
         onClickAdder={onClickAdder}
         onClickChangeHands={onChangeHands}
         onClickAddButton={onClickAddButton}
