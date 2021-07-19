@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import styled from "styled-components";
 import { Button } from "~/components/atoms";
 import { Hands, NineSquares } from "~/components/molecules";
-import { useAdders } from "~/hooks/useAdders";
+import { useSplitAdders } from "~/hooks";
 import * as CC from "~/consts";
 
 export type BaseTripleThreeProps = {
@@ -26,7 +26,7 @@ const BaseTripleThree: React.FC<BaseTripleThreeProps> = ({
   onClickChangeHands,
   onClickAddButton,
 }) => {
-  const { row_adders, column_adders } = useAdders(adders, onClickAdder);
+  const { row_adders, column_adders } = useSplitAdders(adders, onClickAdder);
 
   return (
     <div className={className}>

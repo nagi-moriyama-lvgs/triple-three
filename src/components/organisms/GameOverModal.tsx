@@ -20,7 +20,6 @@ const BaseGameOverModal: React.FC<BaseGameOverModalProps> = ({
   setState,
   onClick,
 }) => {
-  console.log(`open is ${open}`);
   return (
     <>
       {open && (
