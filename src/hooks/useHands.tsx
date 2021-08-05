@@ -2,18 +2,15 @@
 
 import { useState } from "react";
 import { useRandomNumber } from "~/hooks";
+import { BaseTripleThreeProps } from "~/components/organisms/TripleThree";
 
-type AdderType = number[];
-type handsType = [number, number];
-type useHandsType = (
-  adders: AdderType,
-  setAdders: React.Dispatch<React.SetStateAction<AdderType>>
-) => { hands: any; setHands: any; onChangeHands: any; drawNewHand: any };
-
+type AdderType = BaseTripleThreeProps["adders"];
+type HandsType = BaseTripleThreeProps["hands"];
+type SetAddersType = React.Dispatch<React.SetStateAction<AdderType>>;
 const localStorageHans = JSON.parse(localStorage.getItem("hands")!);
 
-export const useHands: useHandsType = (adders, setAdders) => {
-  const [hands, setHands] = useState<handsType>(
+export const useHands = (adders: AdderType, setAdders: SetAddersType) => {
+  const [hands, setHands] = useState<HandsType>(
     localStorageHans || [useRandomNumber(), useRandomNumber()]
   );
 
@@ -27,8 +24,8 @@ export const useHands: useHandsType = (adders, setAdders) => {
     }
   };
 
-  const drawNewHand: () => handsType = () => {
-    const newHands: handsType = [hands[1], useRandomNumber()];
+  const drawNewHand: () => HandsType = () => {
+    const newHands: HandsType = [hands[1], useRandomNumber()];
     setHands(newHands);
     return newHands;
   };

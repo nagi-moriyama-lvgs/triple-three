@@ -1,7 +1,12 @@
+import { BaseTripleThreeProps } from "~/components/organisms/TripleThree";
+
+type HandsType = BaseTripleThreeProps["hands"];
+type AddersType = BaseTripleThreeProps["adders"];
+
 // TripleThreeでAdderを扱うロジック
 export const useAdders = (
-  hands: number[],
-  setAdders: (_: number[]) => void
+  hands: HandsType,
+  setAdders: (_: AddersType) => void
 ) => {
   const onClickAdder = (event: React.MouseEvent) => {
     const adderElement = event.target as HTMLDivElement;

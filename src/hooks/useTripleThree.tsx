@@ -1,19 +1,20 @@
 // TripleThreeのロジック
 import React, { useState } from "react";
 import { useHands, useRandomNumber, useScores, useGameOver } from "~/hooks";
+import { BaseTripleThreeProps } from "~/components/organisms/TripleThree";
 
 // Type
-type squaresType = number[][];
+type SquaresType = BaseTripleThreeProps["squares"];
 
 export const useTripleThree = () => {
   // === Squaresの初期化 ===
   // ランダムな二次元配列を生成
-  const initialSquares: squaresType = [...Array(3)].map(() =>
+  const initialSquares: SquaresType = [...Array(3)].map(() =>
     [...Array(3)].map(() => useRandomNumber())
   );
   const localStorageSquares = JSON.parse(localStorage.getItem("squares")!);
   // 存在すればlocalStorageで初期化
-  const [squares, setSquares] = useState<squaresType>(
+  const [squares, setSquares] = useState<SquaresType>(
     localStorageSquares || initialSquares
   );
 
@@ -27,7 +28,7 @@ export const useTripleThree = () => {
   );
 
   // === Scoresの初期化 ===
-  const { score, bestScore, getScore, updateBestScore } = useScores(squares);
+  const { score, bestScore, updateBestScore } = useScores(squares);
 
   // === GameOverの初期化 ===
   const { gameOver, setGameOver, isGameOver } = useGameOver(squares);

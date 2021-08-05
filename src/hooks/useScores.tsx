@@ -1,10 +1,11 @@
 import { useMemo } from "react";
+import { BaseTripleThreeProps } from "~/components/organisms/TripleThree";
 
 // Scoreを扱うロジック
-type squaresType = number[][];
+type SquaresType = BaseTripleThreeProps["squares"];
 const localStorageBestScore = Number(localStorage.getItem("best"));
 
-const getScore = (squares: squaresType) => {
+const getScore = (squares: SquaresType) => {
   let score = 0;
   const squaresArray = squares.flatMap((_) => _);
   squaresArray.forEach((v) => {
@@ -13,14 +14,14 @@ const getScore = (squares: squaresType) => {
   return score;
 };
 
-const updateBestScore = (squares: squaresType, best: number) => {
+const updateBestScore = (squares: SquaresType, best: number) => {
   const score = getScore(squares);
   if (score > best) {
     localStorage.setItem("bestScore", JSON.stringify(score));
   }
 };
 
-export const useScores = (squares: squaresType) => {
+export const useScores = (squares: SquaresType) => {
   const score = useMemo(() => {
     const number = getScore(squares);
     return number;

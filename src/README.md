@@ -1,3 +1,8 @@
+# リファクタリングすべき場所
+
+onClickAddButton
+各コンポーネントの型をまとめて定義
+
 # Atoms
 
 ## Square

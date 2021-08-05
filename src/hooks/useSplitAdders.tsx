@@ -1,10 +1,10 @@
 // adderを縦横に分割するロジック
-
 import React from "react";
 import { Adder } from "~/components/atoms";
+import { BaseTripleThreeProps } from "~/components/organisms/TripleThree";
 
 export const useSplitAdders = (
-  adders: number[],
+  adders: BaseTripleThreeProps["adders"],
   onClick: (event: React.MouseEvent) => void
 ) => {
   const row_adders: JSX.Element[] = [];

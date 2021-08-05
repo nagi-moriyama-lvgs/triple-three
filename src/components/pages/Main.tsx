@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Description } from "~/components/atoms";
+import { Description } from "~/components/atoms";
 import { Scores } from "~/components/molecules";
 import { TripleThree, GameOverModal } from "~/components/organisms";
 import { useTripleThree } from "~/hooks";
